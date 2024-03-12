@@ -18,7 +18,7 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>vendor.lineage.trust</name>
+        <name>vendor.aosp.trust</name>
         <version>1.0</version>
         <interface>
             <name>IUsbRestrict</name>
