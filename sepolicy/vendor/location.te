@@ -2,7 +2,7 @@
 # Temporarily grant this permission and log its use.
 allow location self:capability { net_admin net_raw };
 auditallow location self:capability { net_admin net_raw };
-
+type xtra_control_prop, sysfs_type;
 allow location self:capability { setgid setuid };
 
 hwbinder_use(location)
