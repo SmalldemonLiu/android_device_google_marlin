@@ -5,3 +5,5 @@ PRODUCT_MAKEFILES := \
 COMMON_LUNCH_CHOICES := \
 	aosp_marlin-userdebug \
 	aosp_sailfish-userdebug
+BOARD_VNDK_VERSION := current
+
