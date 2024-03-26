@@ -14,19 +14,37 @@
 # limitations under the License.
 #
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1440
+# Sample: This is where we'd set a backup provider if we had one
+# $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# Inherit some common PixelExperience stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 PRODUCT_NAME := aosp_marlin
 PRODUCT_DEVICE := marlin
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Pixel XL
-TARGET_MANUFACTURER := HTC
+PRODUCT_MANUFACTURER := HTC
 PRODUCT_RESTRICT_VENDOR_FILES := false
+
+PRODUCT_COPY_FILES += device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.marlin
+
+$(call inherit-product, device/google/marlin/device-marlin.mk)
+$(call inherit-product-if-exists, vendor/google_devices/marlin/device-vendor-marlin.mk)
+
+PRODUCT_PACKAGES += \
+    Launcher3QuickStep \
+    WallpaperPicker
+# Boot animation
+TARGET_BOOT_ANIMATION_RES := 1440
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1440
+
+# Inherit some common Lineage stuff.
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+
+# Inherit device configuration
 
 
 -include device/google/marlin/device-aosp.mk
@@ -41,20 +59,3 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 BUILD_FINGERPRINT := google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys
 
 $(call inherit-product, vendor/google/marlin/marlin-vendor.mk)
-
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
-
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
-PRODUCT_COPY_FILES += device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.marlin
-
-$(call inherit-product, device/google/marlin/device-marlin.mk)
-$(call inherit-product-if-exists, vendor/google_devices/marlin/device-vendor-marlin.mk)
-
-PRODUCT_PACKAGES += \
-    Launcher3QuickStep \
-    WallpaperPicker
-
